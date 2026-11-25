@@ -1,0 +1,1 @@
+Ejecutar python3 app.py y abrir http://localhost:8080. No requiere instalar paquetes. Las publicaciones se guardan en forum.db. El servidor escucha solo en localhost. Prototipo: antes de publicarlo en Internet necesita alojamiento Python, HTTPS, moderación, autenticación y protección contra spam. No publicar datos personales sin autorización. El enlace ISO está pendiente.
