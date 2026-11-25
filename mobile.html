@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>estrelax Mobile</title>
+
+<meta name="description" content="estrelax Mobile es un sistema operativo Linux para celulares y tablets basado en postmarketOS.">
+<meta name="robots" content="index, follow">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: white;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 25px;
+    border-bottom: 2px solid black;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: black;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+header svg {
+    width: 35px;
+    height: 45px;
+}
+
+main {
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.hero {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.info {
+    border: 2px solid black;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+#buscador {
+    width: 100%;
+    padding: 15px;
+    font-size: 17px;
+    border: 2px solid black;
+    margin-bottom: 25px;
+    background: white;
+    color: black;
+}
+
+.dispositivos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.dispositivo {
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.dispositivo h3 {
+    margin-top: 0;
+}
+
+button, .boton {
+    display: inline-block;
+    border: 2px solid black;
+    background: white;
+    color: black;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover, .boton:hover {
+    background: black;
+    color: white;
+}
+
+.estado {
+    font-size: 14px;
+    color: #555;
+}
+
+footer {
+    border-top: 2px solid black;
+    text-align: center;
+    padding: 30px 15px;
+    margin-top: 40px;
+}
+
+footer a {
+    color: black;
+}
+
+[hidden] {
+    display: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html">
+        <svg viewBox="0 0 44 56"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2.5">
+            <path d="M2 19 L12 3 L22 19 L33 3 L42 19 V54 H2 Z M2 19 H42"/>
+        </svg>
+        estrelax Mobile
+    </a>
+</header>
+
+<main>
+
+<section class="hero">
+    <h1>estrelax Mobile</h1>
+    <h2>Linux en tu bolsillo :D</h2>
+    <p>Solo para celulares y tablets</p>
+    <p>Todavía estamos creando estrelax Mobile.</p>
+</section>
+
+<section class="info">
+
+    <h2>¿qué es estrelax Mobile?</h2>
+
+    <p>estrelax Mobile es un proyecto de sistema operativo
+    Linux para celulares y tablets basado en postmarketOS.</p>
+
+    <h2>¿para qué sirve?</h2>
+
+    <p>Su objetivo es revivir dispositivos móviles antiguos
+    y ofrecer una alternativa a Android.</p>
+
+    <h2>¿quiénes son los fundadores?</h2>
+
+    <p>Bernard Silva y Nicolas.</p>
+
+    <h2>¿está disponible?</h2>
+
+    <p>Todavía está en desarrollo y no existen imágenes
+    oficiales de descarga.</p>
+
+</section>
+
+<h2>dispositivos candidatos</h2>
+
+<p>Estos dispositivos son candidatos para futuras pruebas.
+Su compatibilidad con estrelax Mobile todavía no está confirmada.</p>
+
+<input type="search"
+       id="buscador"
+       placeholder="Buscar celular o tablet..."
+       aria-label="Buscar dispositivo">
+
+<div class="dispositivos">
+
+    <article class="dispositivo">
+        <h3>PinePhone</h3>
+        <p>Marca: PINE64</p>
+        <p>Tipo: celular</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>PinePhone Pro</h3>
+        <p>Marca: PINE64</p>
+        <p>Tipo: celular</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>OnePlus 6</h3>
+        <p>Marca: OnePlus</p>
+        <p>Tipo: celular</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>OnePlus 6T</h3>
+        <p>Marca: OnePlus</p>
+        <p>Tipo: celular</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>POCO F1</h3>
+        <p>Marca: Xiaomi</p>
+        <p>Tipo: celular</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>Samsung Galaxy J2 Prime</h3>
+        <p>Marca: Samsung</p>
+        <p>Tipo: celular</p>
+        <p class="estado">Compatibilidad por investigar</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>PineTab</h3>
+        <p>Marca: PINE64</p>
+        <p>Tipo: tablet</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+    <article class="dispositivo">
+        <h3>PineTab 2</h3>
+        <p>Marca: PINE64</p>
+        <p>Tipo: tablet</p>
+        <p class="estado">Pendiente de pruebas</p>
+        <button onclick="aviso()">descargar</button>
+    </article>
+
+</div>
+
+<p id="sin-resultados" hidden>
+No se encontraron dispositivos.
+</p>
+
+<br><br>
+
+<a class="boton"
+   href="https://wiki.postmarketos.org/wiki/Devices"
+   target="_blank"
+   rel="noopener noreferrer">
+    consultar dispositivos de postmarketOS
+</a>
+
+<br><br>
+
+<a class="boton" href="index.html">
+    volver a estrelaxOS
+</a>
+
+</main>
+
+<footer>
+    <h2>estrelax Mobile</h2>
+    <p>Creado por Bernard Silva y Nicolas.</p>
+
+    <a href="forum.html?v=4">foro de estrelaxOS</a>
+
+    <p>¿tienes alguna duda?</p>
+
+    <a href="mailto:ivabena1@gmail.com">
+        ivabena1@gmail.com
+    </a>
+</footer>
+
+<script>
+function aviso() {
+    alert("estrelax Mobile todavía está en desarrollo. La descarga aún no está disponible.");
+}
+
+const buscador = document.getElementById("buscador");
+const dispositivos = document.querySelectorAll(".dispositivo");
+const sinResultados = document.getElementById("sin-resultados");
+
+buscador.addEventListener("input", function () {
+    const texto = buscador.value.toLowerCase().trim();
+    let encontrados = 0;
+
+    dispositivos.forEach(function (dispositivo) {
+        const coincide = dispositivo.textContent
+            .toLowerCase()
+            .includes(texto);
+
+        dispositivo.hidden = !coincide;
+
+        if (coincide) {
+            encontrados++;
+        }
+    });
+
+    sinResultados.hidden = encontrados !== 0;
+});
+</script>
+
+</body>
+</html>
