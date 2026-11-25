@@ -182,74 +182,185 @@ Su compatibilidad con estrelax Mobile todavía no está confirmada.</p>
        id="buscador"
        placeholder="Buscar celular o tablet..."
        aria-label="Buscar dispositivo">
+<div class="dispositivos" id="catalogo"></div>
 
-<div class="dispositivos">
+<script>
+const catalogo = {
+    "Samsung": [
+        "Galaxy S3",
+        "Galaxy S4",
+        "Galaxy S4 Mini",
+        "Galaxy S5",
+        "Galaxy S6",
+        "Galaxy S7",
+        "Galaxy S8",
+        "Galaxy S9",
+        "Galaxy S10",
+        "Galaxy S20",
+        "Galaxy S21",
+        "Galaxy S22",
+        "Galaxy S23",
+        "Galaxy S24",
+        "Galaxy S25",
+        "Galaxy S26",
+        "Galaxy J1",
+        "Galaxy J2",
+        "Galaxy J2 Prime",
+        "Galaxy J3",
+        "Galaxy J4",
+        "Galaxy J5",
+        "Galaxy J6",
+        "Galaxy J7",
+        "Galaxy J7 Prime",
+        "Galaxy J8",
+        "Galaxy A3",
+        "Galaxy A5",
+        "Galaxy A7",
+        "Galaxy A8",
+        "Galaxy A10",
+        "Galaxy A11",
+        "Galaxy A12",
+        "Galaxy A13",
+        "Galaxy A14",
+        "Galaxy A15",
+        "Galaxy A16",
+        "Galaxy A20",
+        "Galaxy A21",
+        "Galaxy A22",
+        "Galaxy A23",
+        "Galaxy A30",
+        "Galaxy A31",
+        "Galaxy A32",
+        "Galaxy A50",
+        "Galaxy A51",
+        "Galaxy A52",
+        "Galaxy A53",
+        "Galaxy A54",
+        "Galaxy A55",
+        "Galaxy A56",
+        "Galaxy Note 2",
+        "Galaxy Note 3",
+        "Galaxy Note 4",
+        "Galaxy Note 5",
+        "Galaxy Note 8",
+        "Galaxy Note 9",
+        "Galaxy Note 10",
+        "Galaxy Note 20",
+        "Galaxy Core Prime",
+        "Galaxy Grand Prime",
+        "Galaxy Tab 2 7.0",
+        "Galaxy Tab 2 10.1",
+        "Galaxy Tab 3",
+        "Galaxy Tab 4",
+        "Galaxy Tab A",
+        "Galaxy Tab A7",
+        "Galaxy Tab A8",
+        "Galaxy Tab A9",
+        "Galaxy Tab S",
+        "Galaxy Tab S2",
+        "Galaxy Tab S3",
+        "Galaxy Tab S4",
+        "Galaxy Tab S5e",
+        "Galaxy Tab S6",
+        "Galaxy Tab S7",
+        "Galaxy Tab S8",
+        "Galaxy Tab S9",
+        "Galaxy Tab S10"
+    ],
 
-    <article class="dispositivo">
-        <h3>PinePhone</h3>
-        <p>Marca: PINE64</p>
-        <p>Tipo: celular</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+    "Redmi": [
+        "Redmi 1",
+        "Redmi 1S",
+        "Redmi 2",
+        "Redmi 3",
+        "Redmi 3S",
+        "Redmi 4",
+        "Redmi 4A",
+        "Redmi 4X",
+        "Redmi 4 Prime",
+        "Redmi 5",
+        "Redmi 5A",
+        "Redmi 5 Plus",
+        "Redmi 6",
+        "Redmi 6A",
+        "Redmi 7",
+        "Redmi 7A",
+        "Redmi 8",
+        "Redmi 8A",
+        "Redmi 9",
+        "Redmi 9A",
+        "Redmi 9C",
+        "Redmi 10",
+        "Redmi 10A",
+        "Redmi 10C",
+        "Redmi 12",
+        "Redmi 12C",
+        "Redmi 13",
+        "Redmi 13C",
+        "Redmi 14C",
+        "Redmi 15",
+        "Redmi Note",
+        "Redmi Note 2",
+        "Redmi Note 3",
+        "Redmi Note 4",
+        "Redmi Note 5",
+        "Redmi Note 6 Pro",
+        "Redmi Note 7",
+        "Redmi Note 8",
+        "Redmi Note 9",
+        "Redmi Note 10",
+        "Redmi Note 11",
+        "Redmi Note 12",
+        "Redmi Note 13",
+        "Redmi Note 14",
+        "Redmi Note 15",
+        "Redmi K20",
+        "Redmi K30",
+        "Redmi K40",
+        "Redmi K50",
+        "Redmi K60",
+        "Redmi K70",
+        "Redmi K80",
+        "Redmi Pad",
+        "Redmi Pad SE",
+        "Redmi Pad Pro"
+    ],
 
-    <article class="dispositivo">
-        <h3>PinePhone Pro</h3>
-        <p>Marca: PINE64</p>
-        <p>Tipo: celular</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+    "PINE64": [
+        "PinePhone",
+        "PinePhone Pro",
+        "PineTab",
+        "PineTab 2",
+        "PineTab-V"
+    ]
+};
 
-    <article class="dispositivo">
-        <h3>OnePlus 6</h3>
-        <p>Marca: OnePlus</p>
-        <p>Tipo: celular</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+const contenedor = document.getElementById("catalogo");
 
-    <article class="dispositivo">
-        <h3>OnePlus 6T</h3>
-        <p>Marca: OnePlus</p>
-        <p>Tipo: celular</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+Object.entries(catalogo).forEach(([marca, modelos]) => {
+    modelos.forEach(modelo => {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "dispositivo";
 
-    <article class="dispositivo">
-        <h3>POCO F1</h3>
-        <p>Marca: Xiaomi</p>
-        <p>Tipo: celular</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+        const titulo = document.createElement("h3");
+        titulo.textContent = modelo;
 
-    <article class="dispositivo">
-        <h3>Samsung Galaxy J2 Prime</h3>
-        <p>Marca: Samsung</p>
-        <p>Tipo: celular</p>
-        <p class="estado">Compatibilidad por investigar</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+        const fabricante = document.createElement("p");
+        fabricante.textContent = "Marca: " + marca;
 
-    <article class="dispositivo">
-        <h3>PineTab</h3>
-        <p>Marca: PINE64</p>
-        <p>Tipo: tablet</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+        const estado = document.createElement("p");
+        estado.className = "estado";
+        estado.textContent = "Compatibilidad por verificar";
 
-    <article class="dispositivo">
-        <h3>PineTab 2</h3>
-        <p>Marca: PINE64</p>
-        <p>Tipo: tablet</p>
-        <p class="estado">Pendiente de pruebas</p>
-        <button onclick="aviso()">descargar</button>
-    </article>
+        const boton = document.createElement("button");
+        boton.textContent = "descarga no disponible";
+        boton.disabled = true;
 
-</div>
+        tarjeta.append(titulo, fabricante, estado, boton);
+        contenedor.appendChild(tarjeta);
+    });
+});
+</script>
 
 <p id="sin-resultados" hidden>
 No se encontraron dispositivos.
@@ -258,16 +369,15 @@ No se encontraron dispositivos.
 <br><br>
 
 <a class="boton"
-   href="https://wiki.postmarketos.org/wiki/Devices"
-   target="_blank"
-   rel="noopener noreferrer">
-    consultar dispositivos de postmarketOS
+href="https://wiki.postmarketos.org/wiki/Devices"
+target="_blank" rel="noopener noreferrer">
+consultar dispositivos de postmarketOS
 </a>
 
 <br><br>
 
 <a class="boton" href="index.html">
-    volver a estrelaxOS
+volver a estrelaxOS
 </a>
 
 </main>
@@ -275,21 +385,14 @@ No se encontraron dispositivos.
 <footer>
     <h2>estrelax Mobile</h2>
     <p>Creado por Bernard Silva y Nicolas.</p>
-
     <a href="forum.html?v=4">foro de estrelaxOS</a>
-
     <p>¿tienes alguna duda?</p>
-
     <a href="mailto:ivabena1@gmail.com">
         ivabena1@gmail.com
     </a>
 </footer>
 
 <script>
-function aviso() {
-    alert("estrelax Mobile todavía está en desarrollo. La descarga aún no está disponible.");
-}
-
 const buscador = document.getElementById("buscador");
 const dispositivos = document.querySelectorAll(".dispositivo");
 const sinResultados = document.getElementById("sin-resultados");
