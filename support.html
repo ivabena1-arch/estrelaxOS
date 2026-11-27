@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>estrelaxOS support</title>
+
+<meta name="description" content="Soporte oficial de estrelaxOS. Encuentra soluciones a problemas de instalación, reinicio y funcionamiento.">
+<meta name="robots" content="index, follow">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px 5%;
+    border-bottom: 3px solid black;
+    font-size: 25px;
+}
+
+header svg {
+    width: 40px;
+    height: 50px;
+}
+
+header a {
+    color: black;
+    text-decoration: none;
+}
+
+header em {
+    font-family: cursive;
+    font-size: 32px;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 50px 20px;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 40px;
+}
+
+.problema {
+    border: 2px solid black;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+.problema summary {
+    padding: 22px;
+    font-size: 22px;
+    cursor: pointer;
+    background: white;
+    color: black;
+}
+
+.problema summary:hover {
+    background: black;
+    color: white;
+}
+
+.problema[open] summary {
+    background: black;
+    color: white;
+}
+
+.solucion {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.boton {
+    display: block;
+    border: 2px solid black;
+    padding: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    margin: 15px 0;
+}
+
+.boton:hover {
+    background: black;
+    color: white;
+}
+
+.aviso {
+    border: 2px solid black;
+    padding: 20px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+footer {
+    border-top: 3px solid black;
+    padding: 25px;
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .problema summary {
+        font-size: 18px;
+    }
+
+    main {
+        padding: 25px 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <svg viewBox="0 0 44 56"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2.5">
+        <path d="M2 19 L12 3 L22 19 L33 3 L42 19 V54 H2 Z M2 19 H42"/>
+    </svg>
+
+    <a href="index.html">estrelaxOS</a>
+    <em>support</em>
+</header>
+
+<main>
+
+<section class="hero">
+    <h1>soporte de estrelaxOS</h1>
+    <p>¿tienes algún problema? estamos para ayudarte :D</p>
+</section>
+
+<section class="aviso">
+    <strong>AVISO:</strong>
+
+    <p>estrelaxOS todavía está en desarrollo y puede
+    presentar errores de instalación y reinicio.</p>
+
+    <p>Realiza una copia de seguridad de tus archivos
+    antes de instalar el sistema operativo.</p>
+</section>
+
+<h2>selecciona tu problema</h2>
+
+<details class="problema">
+    <summary>error de instalación</summary>
+
+    <div class="solucion">
+
+        <p>Comprueba que la imagen ISO no esté dañada.</p>
+
+        <p>Si aparece un error durante la instalación,
+        contacta con nuestro soporte e indica el
+        mensaje de error.</p>
+
+        <p>No formatees nuevamente tu disco sin tener
+        una copia de seguridad.</p>
+
+        <a class="boton" href="mailto:ivabena1@gmail.com">
+            contactar con soporte de estrelaxOS
+        </a>
+
+        <a class="boton"
+           href="https://www.debian.org/support"
+           target="_blank" rel="noopener noreferrer">
+            consultar soporte de Debian
+        </a>
+
+        <a class="boton"
+           href="https://help.ubuntu.com/"
+           target="_blank" rel="noopener noreferrer">
+            consultar documentación de Ubuntu
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>error al reiniciar</summary>
+
+    <div class="solucion">
+
+        <p>Si estrelaxOS tiene problemas al reiniciar,
+        intenta apagar normalmente y volver a encender
+        tu computadora.</p>
+
+        <p>No fuerces el apagado durante una instalación
+        o actualización del sistema.</p>
+
+        <a class="boton" href="mailto:ivabena1@gmail.com">
+            contactar con soporte
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>pantalla negra</summary>
+
+    <div class="solucion">
+
+        <p>Si aparece una pantalla negra al iniciar
+        estrelaxOS, contacta con nuestro soporte.</p>
+
+        <p>Indica el modelo de tu computadora,
+        procesador y tarjeta gráfica.</p>
+
+        <a class="boton" href="forum.html">
+            pedir ayuda en el foro
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>problemas con Wi-Fi</summary>
+
+    <div class="solucion">
+
+        <p>Comprueba que el Wi-Fi esté activado.</p>
+
+        <p>También puedes abrir una terminal y ejecutar:</p>
+
+        <pre>nmcli device status</pre>
+
+        <p>Este comando permite comprobar los dispositivos
+        de red reconocidos por NetworkManager, si está instalado.</p>
+
+        <a class="boton" href="forum.html">
+            pedir ayuda en el foro
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>problemas con el sonido</summary>
+
+    <div class="solucion">
+
+        <p>Abre la configuración de sonido y comprueba
+        el volumen y el dispositivo de salida.</p>
+
+        <p>Comprueba que el sonido no esté silenciado.</p>
+
+        <a class="boton" href="mailto:ivabena1@gmail.com">
+            contactar con soporte
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>problemas con los juegos</summary>
+
+    <div class="solucion">
+
+        <p>Comprueba los requisitos del juego y
+        los controladores de tu tarjeta gráfica.</p>
+
+        <p>No todos los juegos de Windows son
+        compatibles con Linux.</p>
+
+        <a class="boton" href="forum.html">
+            pedir ayuda en el foro
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>problemas con estrelax Mobile</summary>
+
+    <div class="solucion">
+
+        <p>estrelax Mobile está basado en postmarketOS
+        y todavía está en desarrollo.</p>
+
+        <p>Comprueba la compatibilidad exacta de tu
+        celular o tablet antes de instalarlo.</p>
+
+        <a class="boton" href="mobile.html">
+            consultar dispositivos
+        </a>
+
+        <a class="boton"
+           href="https://wiki.postmarketos.org/"
+           target="_blank" rel="noopener noreferrer">
+            documentación de postmarketOS
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>otros problemas</summary>
+
+    <div class="solucion">
+
+        <p>Cuéntanos qué problema tienes.</p>
+
+        <a class="boton" href="forum.html">
+            ir al foro
+        </a>
+
+        <a class="boton" href="mailto:ivabena1@gmail.com">
+            enviar correo
+        </a>
+
+    </div>
+</details>
+
+<br>
+
+<h2>contactos de soporte</h2>
+
+<details class="problema">
+    <summary>soporte de estrelaxOS</summary>
+
+    <div class="solucion">
+
+        <p>Correo oficial de nuestro proyecto:</p>
+
+        <p><strong>ivabena1@gmail.com</strong></p>
+
+        <a class="boton"
+           href="mailto:ivabena1@gmail.com">
+            enviar correo a estrelaxOS
+        </a>
+
+        <a class="boton" href="forum.html">
+            foro de estrelaxOS
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>soporte de Debian</summary>
+
+    <div class="solucion">
+
+        <p>Lista de correo comunitaria de Debian:</p>
+
+        <p><strong>debian-user@lists.debian.org</strong></p>
+
+        <p>Los mensajes enviados a esta lista
+        pueden ser públicos.</p>
+
+        <a class="boton"
+           href="mailto:debian-user@lists.debian.org">
+            enviar correo a la comunidad Debian
+        </a>
+
+        <a class="boton"
+           href="https://www.debian.org/support"
+           target="_blank" rel="noopener noreferrer">
+            visitar soporte de Debian
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>soporte de Ubuntu</summary>
+
+    <div class="solucion">
+
+        <p>Lista de correo comunitaria de Ubuntu:</p>
+
+        <p><strong>ubuntu-users@lists.ubuntu.com</strong></p>
+
+        <p>Los mensajes enviados a esta lista
+        pueden ser públicos.</p>
+
+        <a class="boton"
+           href="mailto:ubuntu-users@lists.ubuntu.com">
+            enviar correo a la comunidad Ubuntu
+        </a>
+
+        <a class="boton"
+           href="https://help.ubuntu.com/"
+           target="_blank" rel="noopener noreferrer">
+            visitar documentación de Ubuntu
+        </a>
+
+    </div>
+</details>
+
+<details class="problema">
+    <summary>soporte de postmarketOS</summary>
+
+    <div class="solucion">
+
+        <p>Consulta la documentación y los canales
+        comunitarios de postmarketOS.</p>
+
+        <a class="boton"
+           href="https://postmarketos.org/"
+           target="_blank" rel="noopener noreferrer">
+            sitio oficial de postmarketOS
+        </a>
+
+        <a class="boton"
+           href="https://wiki.postmarketos.org/"
+           target="_blank" rel="noopener noreferrer">
+            documentación de postmarketOS
+        </a>
+
+    </div>
+</details>
+
+<br>
+
+<h2>¿no encontraste una solución?</h2>
+
+<p>Contacta con nosotros indicando el modelo de tu
+dispositivo, la versión de estrelaxOS y el mensaje
+de error. No compartas contraseñas ni datos privados.</p>
+
+<a class="boton" href="mailto:ivabena1@gmail.com">
+    contactar con nuestro soporte
+</a>
+
+<a class="boton" href="forum.html">
+    preguntar en el foro
+</a>
+
+<a class="boton" href="index.html">
+    volver al inicio
+</a>
+
+</main>
+
+<footer>
+
+    <h2>estrelaxOS support</h2>
+
+    <p>creado por Bernard Silva y Nicolas.</p>
+
+    <p>¿tienes alguna duda?</p>
+
+    <a href="mailto:ivabena1@gmail.com">
+        ivabena1@gmail.com
+    </a>
+
+</footer>
+
+</body>
+</html>
