@@ -1,10 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>estrelaxOS forum</title>
+
+<meta name="description" content="Foro oficial de estrelaxOS. Comparte publicaciones y conversa con la comunidad.">
+<meta name="robots" content="index, follow">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -62,7 +64,7 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     background: black;
     color: white;
 }
@@ -92,9 +94,47 @@ button:disabled {
     color: #555;
 }
 
+.reply-button {
+    border: 2px solid black;
+    padding: 10px 18px;
+    font-size: 14px;
+    margin-right: 12px;
+}
+
+.replies {
+    margin-top: 20px;
+    padding-left: 20px;
+    border-left: 2px solid black;
+}
+
+.reply {
+    padding: 12px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.reply:last-child {
+    border-bottom: none;
+}
+
+.reply p {
+    margin: 8px 0;
+}
+
+.reply strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.reply-count {
+    font-size: 14px;
+    color: #555;
+}
+
 dialog {
     border: 3px solid black;
     width: min(500px, 90%);
+    max-height: 90vh;
+    overflow-y: auto;
     padding: 25px;
 }
 
@@ -124,6 +164,10 @@ footer {
 footer a {
     color: black;
 }
+
+#replyTo {
+    overflow-wrap: anywhere;
+}
 </style>
 </head>
 
@@ -142,6 +186,7 @@ footer a {
 </header>
 
 <main>
+
     <div class="toolbar">
         <button id="open">crear una publicación</button>
     </div>
@@ -149,26 +194,33 @@ footer a {
     <section id="posts" aria-live="polite">
         Cargando publicaciones...
     </section>
+
 </main>
 
+<!-- Ventana para crear publicaciones -->
+
 <dialog id="modal">
+
     <h2>Crear una publicación</h2>
 
     <form id="postForm">
 
         <label for="author">Nombre de usuario</label>
+
         <input id="author"
                placeholder="Tu nombre de usuario"
                maxlength="40"
                required>
 
         <label for="title">Título</label>
+
         <input id="title"
                placeholder="Título"
                maxlength="150"
                required>
 
         <label for="content">Publicación</label>
+
         <textarea id="content"
                   placeholder="Escribe tu publicación..."
                   maxlength="5000"
@@ -183,7 +235,47 @@ footer a {
         </button>
 
         <p id="status" role="status"></p>
+
     </form>
+
+</dialog>
+
+<!-- Ventana para responder publicaciones -->
+
+<dialog id="replyModal">
+
+    <h2>Responder publicación</h2>
+
+    <p id="replyTo"></p>
+
+    <form id="replyForm">
+
+        <label for="replyAuthor">Nombre de usuario</label>
+
+        <input id="replyAuthor"
+               placeholder="Tu nombre de usuario"
+               maxlength="40"
+               required>
+
+        <label for="replyContent">Tu respuesta</label>
+
+        <textarea id="replyContent"
+                  placeholder="Escribe tu respuesta..."
+                  maxlength="5000"
+                  required></textarea>
+
+        <button type="submit" id="publishReply">
+            Publicar respuesta
+        </button>
+
+        <button type="button" id="closeReply">
+            Cancelar
+        </button>
+
+        <p id="replyStatus" role="status"></p>
+
+    </form>
+
 </dialog>
 
 <footer>
@@ -209,18 +301,95 @@ const form = document.getElementById("postForm");
 const status = document.getElementById("status");
 const publish = document.getElementById("publish");
 
+const replyModal = document.getElementById("replyModal");
+const replyForm = document.getElementById("replyForm");
+const replyStatus = document.getElementById("replyStatus");
+const publishReply = document.getElementById("publishReply");
+
+let selectedPostId = null;
+let loading = false;
+let lastSnapshot = null;
+
+// Abrir ventana de publicaciones
+
 document.getElementById("open").onclick = () => {
     status.textContent = "";
     modal.showModal();
 };
 
 document.getElementById("close").onclick = () => {
-    modal.close();
+    if (!publish.disabled) {
+        modal.close();
+    }
 };
 
+// Cerrar ventana de respuestas
+
+document.getElementById("closeReply").onclick = () => {
+    if (!publishReply.disabled) {
+        replyModal.close();
+    }
+};
+
+modal.addEventListener("cancel", event => {
+    if (publish.disabled) event.preventDefault();
+});
+
+replyModal.addEventListener("cancel", event => {
+    if (publishReply.disabled) event.preventDefault();
+});
+
+// Iniciar sesión anónima
+
+async function iniciarSesion() {
+
+    const { data, error } =
+        await db.auth.getSession();
+
+    if (error) throw error;
+
+    if (!data.session) {
+
+        const { error: loginError } =
+            await db.auth.signInAnonymously();
+
+        if (loginError) throw loginError;
+    }
+}
+
+// Formatear fecha
+
+function fecha(valor) {
+    return new Date(valor).toLocaleString("es-CL");
+}
+
+// Abrir formulario de respuesta
+
+function responder(post) {
+
+    selectedPostId = post.id;
+
+    replyForm.reset();
+
+    document.getElementById("replyTo").textContent =
+        "Respondiendo a: " + post.title;
+
+    replyStatus.textContent = "";
+
+    replyModal.showModal();
+}
+
+// Cargar publicaciones y respuestas
+
 async function cargarPublicaciones() {
+
+    if (loading) return;
+
+    loading = true;
+
     try {
-        const { data, error } = await db
+
+        const { data: publicaciones, error } = await db
             .from("posts")
             .select("id, author, title, content, created_at")
             .order("created_at", { ascending: false })
@@ -228,15 +397,62 @@ async function cargarPublicaciones() {
 
         if (error) throw error;
 
-        posts.replaceChildren();
+        if (publicaciones.length === 0) {
 
-        if (data.length === 0) {
             posts.textContent =
                 "Todavía no hay publicaciones.";
+
+            lastSnapshot = null;
+
             return;
         }
 
-        for (const post of data) {
+        const ids = publicaciones.map(post => post.id);
+
+        const respuestas = [];
+
+        // Cargar respuestas por páginas
+
+        for (let inicio = 0; ; inicio += 500) {
+
+            const { data, error: replyError } = await db
+                .from("replies")
+                .select("id, post_id, author, content, created_at")
+                .in("post_id", ids)
+                .order("created_at", { ascending: true })
+                .order("id", { ascending: true })
+                .range(inicio, inicio + 499);
+
+            if (replyError) throw replyError;
+
+            respuestas.push(...data);
+
+            if (data.length < 500) break;
+        }
+
+        const snapshot = JSON.stringify([
+            publicaciones,
+            respuestas
+        ]);
+
+        if (snapshot === lastSnapshot) return;
+
+        const fragment = document.createDocumentFragment();
+
+        const grupos = new Map();
+
+        for (const respuesta of respuestas) {
+
+            const id = String(respuesta.post_id);
+
+            if (!grupos.has(id)) {
+                grupos.set(id, []);
+            }
+
+            grupos.get(id).push(respuesta);
+        }
+
+        for (const post of publicaciones) {
 
             const article = document.createElement("article");
             article.className = "post";
@@ -245,29 +461,95 @@ async function cargarPublicaciones() {
             title.textContent = post.title;
 
             const author = document.createElement("small");
+
             author.textContent =
-                post.author + " — " +
-                new Date(post.created_at)
-                    .toLocaleString("es-CL");
+                post.author + " — " + fecha(post.created_at);
 
             const content = document.createElement("p");
             content.textContent = post.content;
 
-            article.append(title, author, content);
-            posts.appendChild(article);
+            const boton = document.createElement("button");
+            boton.className = "reply-button";
+            boton.textContent = "responder";
+
+            boton.onclick = () => responder(post);
+
+            const comentarios =
+                grupos.get(String(post.id)) || [];
+
+            const contador = document.createElement("span");
+            contador.className = "reply-count";
+
+            contador.textContent =
+                comentarios.length +
+                (comentarios.length === 1
+                    ? " respuesta"
+                    : " respuestas");
+
+            article.append(
+                title,
+                author,
+                content,
+                boton,
+                contador
+            );
+
+            if (comentarios.length > 0) {
+
+                const lista = document.createElement("div");
+                lista.className = "replies";
+
+                for (const respuesta of comentarios) {
+
+                    const item = document.createElement("div");
+                    item.className = "reply";
+
+                    const nombre = document.createElement("strong");
+                    nombre.textContent = respuesta.author;
+
+                    const hora = document.createElement("small");
+                    hora.textContent = fecha(respuesta.created_at);
+
+                    const mensaje = document.createElement("p");
+                    mensaje.textContent = respuesta.content;
+
+                    item.append(nombre, hora, mensaje);
+
+                    lista.appendChild(item);
+                }
+
+                article.appendChild(lista);
+            }
+
+            fragment.appendChild(article);
         }
 
+        posts.replaceChildren(fragment);
+
+        lastSnapshot = snapshot;
+
     } catch (error) {
+
         posts.textContent =
             "No se pudo conectar al foro: " + error.message;
 
+        lastSnapshot = null;
+
         console.error(error);
+
+    } finally {
+
+        loading = false;
     }
 }
 
-form.addEventListener("submit", async (event) => {
+// Publicar una nueva publicación
+
+form.addEventListener("submit", async event => {
 
     event.preventDefault();
+
+    if (publish.disabled) return;
 
     publish.disabled = true;
     status.textContent = "Publicando...";
@@ -287,18 +569,7 @@ form.addEventListener("submit", async (event) => {
             throw new Error("Completa todos los campos.");
         }
 
-        const { data, error: sessionError } =
-            await db.auth.getSession();
-
-        if (sessionError) throw sessionError;
-
-        if (!data.session) {
-
-            const { error } =
-                await db.auth.signInAnonymously();
-
-            if (error) throw error;
-        }
+        await iniciarSesion();
 
         const { error } = await db
             .from("posts")
@@ -311,6 +582,7 @@ form.addEventListener("submit", async (event) => {
         if (error) throw error;
 
         form.reset();
+
         modal.close();
 
         await cargarPublicaciones();
@@ -323,9 +595,69 @@ form.addEventListener("submit", async (event) => {
     } finally {
 
         publish.disabled = false;
-
     }
 });
+
+// Publicar una respuesta
+
+replyForm.addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    if (publishReply.disabled) return;
+
+    publishReply.disabled = true;
+
+    replyStatus.textContent = "Publicando respuesta...";
+
+    try {
+
+        const author =
+            document.getElementById("replyAuthor").value.trim();
+
+        const content =
+            document.getElementById("replyContent").value.trim();
+
+        if (!author || !content) {
+            throw new Error("Completa todos los campos.");
+        }
+
+        if (selectedPostId === null) {
+            throw new Error("Publicación no seleccionada.");
+        }
+
+        await iniciarSesion();
+
+        const { error } = await db
+            .from("replies")
+            .insert({
+                post_id: selectedPostId,
+                author,
+                content
+            });
+
+        if (error) throw error;
+
+        replyForm.reset();
+
+        replyModal.close();
+
+        selectedPostId = null;
+
+        await cargarPublicaciones();
+
+    } catch (error) {
+
+        replyStatus.textContent =
+            "Error: " + error.message;
+
+    } finally {
+
+        publishReply.disabled = false;
+    }
+});
+
+// Actualizar automáticamente
 
 cargarPublicaciones();
 
