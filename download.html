@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Descargar estrelaxOS</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    border-bottom: 3px solid black;
+    padding: 20px 5%;
+}
+
+header a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: black;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+header svg {
+    width: 40px;
+    height: 50px;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 45px;
+}
+
+.aviso {
+    border: 3px solid black;
+    padding: 30px;
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.icono {
+    width: 75px;
+    height: 75px;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+button {
+    background: white;
+    color: black;
+    border: 3px solid black;
+    padding: 20px;
+    width: 200px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: black;
+    color: white;
+}
+
+footer {
+    border-top: 3px solid black;
+    padding: 25px;
+    text-align: center;
+}
+
+a {
+    color: black;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html">
+        <svg viewBox="0 0 44 56"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="2.5">
+            <path d="M2 19 L12 3 L22 19 L33 3 L42 19 V54 H2 Z M2 19 H42"/>
+        </svg>
+        estrelaxOS
+    </a>
+</header>
+
+<main>
+
+    <svg class="icono" viewBox="0 0 100 100">
+        <path d="M50 8 L95 90 H5 Z"
+              fill="none"
+              stroke="black"
+              stroke-width="5"/>
+        <path d="M50 33 V60"
+              stroke="black"
+              stroke-width="7"/>
+        <circle cx="50" cy="75" r="4"/>
+    </svg>
+
+    <h1>AVISO</h1>
+
+    <section class="aviso">
+
+        <p>
+            Nuestro sistema operativo tiene errores
+            conocidos de instalación y reinicio.
+        </p>
+
+        <p>
+            Por favor, si aparece un error durante
+            la instalación, contacta con el soporte
+            de estrelaxOS o consulta la documentación
+            de Ubuntu si corresponde a esa base.
+        </p>
+
+        <p>
+            Si aparecen errores de reinicio, intenta
+            apagar y encender tu computadora cuando
+            sea seguro hacerlo.
+        </p>
+
+        <p>
+            No apagues tu computadora mientras se
+            esté instalando o actualizando el sistema.
+        </p>
+
+        <p>
+            Recomendamos realizar una copia de seguridad
+            de tus archivos antes de instalar estrelaxOS.
+        </p>
+
+    </section>
+
+    <h2>¿estás seguro de instalar estrelaxOS?</h2>
+
+    <div class="botones">
+
+        <button onclick="descargar()">
+            sí
+        </button>
+
+        <button onclick="window.location.href='index.html'">
+            no
+        </button>
+
+    </div>
+
+</main>
+
+<footer>
+    <a href="forum.html?v=30">foro de estrelaxOS</a>
+
+    <p>
+        ¿tienes alguna duda?
+        <a href="mailto:ivabena1@gmail.com">
+            contacta con nosotros
+        </a>
+    </p>
+</footer>
+
+<script>
+function descargar() {
+    alert("La descarga de estrelaxOS todavía no está disponible.");
+}
+</script>
+
+</body>
+</html>
